@@ -1,0 +1,134 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<section id="inner-headline">
+    <div class="container">
+        <div class="row">
+            <div class="span4">
+                <div class="inner-heading">
+                    <h2>Order Tracking</h2>
+                </div>
+            </div>
+            <div class="span8">
+                <ul class="breadcrumb">
+                    <li><a href="/"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
+                    <li><a href="/ViewMyOrders">My Orders</a><i class="icon-angle-right"></i></li>
+                    <li class="active">Order Tracking</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="content">
+    <div class="container">
+        <div class="row">
+            <div class="span8">
+                <article>
+                    <div class="row">
+                        <div class="span8">
+                            <div class="post-image">
+                                <div class="post-heading">
+                                    <h4>Track your order <strong>online</strong></h4>
+                                </div>
+                                {% include 'includes/_messages.html' %}
+                            </div>
+                            <div class="row">
+                                <form action="" method="post" role="form" class="contactForm">
+                                    <div class="span8 form-group">
+                                        <h6>Order Details</h6>
+                                    </div>
+                                    <div class="span4 form-group">
+                                        <label for="orderId">Order Id</label>
+                                        <input type="text" name="orderId" class="form-control" placeholder="" value="{{order.ID_Order}}" readonly />
+                                    </div>
+                                    <div class="span4 form-group">
+                                        <label for="orderDate">Order Date</label>
+                                        <input type="text" name="orderDate" class="form-control" placeholder="" value="{{order.Order_Date}}" readonly />
+                                    </div>
+                                    <div class="span8 form-group">
+                                        <label for="orderType">Order Type</label>
+                                        <input type="text" name="orderType" class="form-control" placeholder="" value="{{order.Order_Type}}" readonly />
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="row">
+                                <div class="span8">
+                                    <h6>Order Goods</h6>
+                                    <div class="accordion" id="accordion2">
+                                        <div class="accordion-group">
+                                            <div class="accordion-heading">
+                                                <a class="accordion-toggle active" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+                                                    <i class="icon-minus"></i> Goods List
+                                                </a>
+                                            </div>
+                                            <div id="collapseOne" class="accordion-body collapse in">
+                                                <div class="accordion-inner">
+                                                    
+                                                    <table class="table table-hover">
+                                                        <thead>
+                                                        <tr>
+                                                            <th>SKU</th>
+                                                            <th>Description</th>
+                                                            <th>Unit</th>
+                                                            <th>Quantity</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                    {%  for good in goods %}
+                                                        <tr>
+                                                            <td> {{good.SKU}} </td>
+                                                            <td> {{good.Good_Desc}} </td>
+                                                            <td> {{good.Unit_Desc}} </td>
+                                                            <td> {{good.Quan_Order}} </td>
+                                                        </tr>
+                                                    {% endfor %}
+                                                        </tbody>
+                                                    </table>
+                                                
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="span8">
+                                    <table class="table table-striped">
+                                        <thead>
+                                        <tr>
+                                            <th>DATE</th>
+                                            <th>ORDER STATUS</th>
+                                            <th>COMMENTS</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                    {%  for tracking in tracks %}
+                                            <tr>
+                                                <td>{{tracking.Process_Date}}</td>
+                                                <td>{{tracking.Desc_Status}}</td>
+                                                <td>{{tracking.Order_Comments}}</td>
+                                            </tr>
+                                    {%  endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="span8">
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <!-- RIGHT MENU OPTIONS -->
+            {% include 'includes/RightMenu.html' %}
+            <!-- END RIGHT MENU OPTIONS -->
+            
+        </div>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,86 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<section id="inner-headline">
+    <div class="container">
+        <div class="row">
+            <div class="span4">
+                <div class="inner-heading">
+                    <h2>My Orders</h2>
+                </div>
+            </div>
+            <div class="span8">
+                <ul class="breadcrumb">
+                    <li><a href="/"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
+                    <li><a href="/ViewMyOrders">Services</a><i class="icon-angle-right"></i></li>
+                    <li class="active">My Orders</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="content">
+    <div class="container">
+      <div class="row">
+        <div class="span8">
+          <article>
+            <div class="row">
+              <div class="span8">
+                <div class="post-image">
+                  <div class="post-heading">
+                    <h4>Track your order <strong>online</strong></h4>
+                  </div>
+                  
+                </div>
+                <div class="">
+                  <form class="form-search">
+                    <input placeholder="Enter a keyword" type="text" class="input-medium search-query">
+                    <button type="submit" class="btn btn-square btn-theme">Search</button>
+                  </form>
+                  <table class="table table-hover">
+                    <thead>
+                      <tr>
+                        <th>Order Id</th>
+                        <th>Type</th>
+                        <th>Date</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                        <th>Track</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                {%  for order in ClientOrders %}
+                        <tr>
+                            <td> {{order.ID_Order}} </td>
+                            <td> {{order.Desc_Type}} </td>
+                            <td> {{order.Order_Date}} </td>
+                            <td> {{order.Order_Status}} </td>
+                            <td> <a href="#">Update</a></td>
+                            <td> <a href="/ViewMyOrderTracking/{{order.ID_Order}}">See Tracking</a></td>
+                        </tr>
+                {% endfor %}
+                    </tbody>
+                  </table>
+                  {% include 'includes/_messages.html' %}
+                </div>
+                <div class="row">
+                    <hr>
+                </div>
+              </div>
+            </div>
+          </article>
+          
+          
+        </div>
+
+        <!-- RIGHT MENU OPTIONS -->
+        {% include 'includes/RightMenu.html' %}
+        <!-- END RIGHT MENU OPTIONS -->
+        
+      </div>
+    </div>
+</section>
+
+{% endblock %}

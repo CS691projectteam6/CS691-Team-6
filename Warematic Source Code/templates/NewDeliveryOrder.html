@@ -1,0 +1,167 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<!-- TITLE FOR DATA ENTRY FORM: NEW PICK UP ORDERS -->
+<section id="inner-headline">
+    <div class="container">
+        <div class="row">
+            <div class="span4">
+                <div class="inner-heading">
+                    <h2>New Delivery Order</h2>
+                </div>
+            </div>
+            <div class="span8">
+                <ul class="breadcrumb">
+                    <li><a href="/"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
+                    <li><a href="#">Services</a><i class="icon-angle-right"></i></li>
+                    <li class="active">Delivery Goods</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- END TITLE FOR DATA ENTRY FORM: NEW DELIVERY ORDERS -->
+
+<!-- HERE STARTS THE DATA ENTRY FORM  -->
+<section id="content">
+    <div class="container">
+        <div class="row">
+            <div class="span8">
+                <article>
+                    <div class="row">
+                        <div class="span8">
+                            
+                            <div class="post-image">
+                                <div class="post-heading">
+                                    <h4>Create a new Delivery order by filling <strong>the form below</strong></h4>
+                                </div>
+                                {% include 'includes/_messages.html' %}
+                            </div>
+                
+                            <div>
+                                
+                                <form action="" method="post" class="contactForm">
+                                    <input type="hidden" name="numOfItems" id="numOfItems" value="" />
+                                    <div id="sendmessage">Your message has been sent. Thank you!</div>
+                                    <div id="errormessage"></div>
+        
+                                    <div class="row">
+                                        <div class="span8 form-group">
+                                            <h6>Contact Information</h6>
+                                        </div>
+                                        <div class="span8 form-group">
+                                            <input type="text" name="fullname" class="form-control" id="fullname" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" value="{{userInfo.Full_Name}}" readonly />
+                                            <div class="validation"></div>
+                                        </div>
+                                        <div class="span4 form-group">
+                                            <input type="text" class="form-control" name="phone" id="phone" placeholder="Your Phone" data-rule="email" data-msg="Please enter a valid email" value="{{userInfo.User_Phone}}" readonly />
+                                            <div class="validation"></div>
+                                        </div>
+                                        <div class="span4 form-group">
+                                            <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" value="{{userInfo.User_Name}}" readonly />
+                                            <div class="validation"></div>
+                                        </div>
+                                        <div class="span8 form-group">
+                                            <h6>Receiver</h6>
+                                        </div>
+                                        <div class="span8 form-group">
+                                            <input type="text" name="receiver_name" class="form-control" id="receiver_name" placeholder="Receiver Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                                        </div>
+                                        <div class="span8 form-group">
+                                            <h6>Delivery Address</h6>
+                                        </div>
+                                        <div class="span4 form-group">
+                                            <input type="text" class="form-control" name="street" id="street" placeholder="Street" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" value="{{userInfo.Street_Address}}" />
+                                            <div class="validation"></div>
+                                        </div>
+                                        <div class="span4 form-group">
+                                            <input type="text" class="form-control" name="house" id="house" placeholder="House, Building, Apartment" data-rule="email" data-msg="Please enter a valid email" value="{{userInfo.House_Address}}" />
+                                            <div class="validation"></div>
+                                        </div>
+                                        <div class="span8 form-group">
+                                            <input type="text" class="form-control" name="city" id="city" placeholder="City" data-rule="email" data-msg="Please enter a valid email" value="{{userInfo.City}}" />
+                                            <div class="validation"></div>
+                                        </div>
+                                        <div class="span4 form-group">
+                                            <select class="form-control" name="state" id="state" style="width: 100%; height: 40px;">
+                                                <option value="">Select...</option>
+                                                {% for state in states %}
+                                                    <option value="{{state.ID_State}}" {% if state.ID_State == userInfo.State %} selected {% endif %} > {{state.State_Desc}} </option>
+                                                {% endfor %}
+                                            </select>
+                                            <div class="validation"></div>
+                                        </div>
+                                        <div class="span4 form-group">
+                                            <input type="text" class="form-control" name="zipCode" id="zipCode" placeholder="Zip Code" data-rule="email" data-msg="Please enter a valid email" value="{{userInfo.ZipCode}}" />
+                                            <div class="validation"></div>
+                                        </div>
+                                        <div class="span8 form-group">
+                                            <h6>Delivery Date</h6>
+                                        </div>
+                                        <div class="span4 form-group">
+                                            <input type="text" class="form-control" name="deliverydate" id="deliverydate" placeholder="Enter Delivery date" data-rule="" data-msg="" />
+                                            <div class="validation"></div>
+                                        </div>
+                                
+                                        <div class="span8 form-group">
+                                            <h6>Available Goods in Warehouse to Deliver</h6>
+                                        </div>
+                                        
+                                        <div class="span8 margintop3 form-group">
+
+                                            <table id="items" class="table table-striped">
+                                                <thead>
+                                                  <tr>
+                                                    <th>Select</th>
+                                                    <th>SKU</th>
+                                                    <th>Description</th>
+                                                    <th>Unit</th>
+                                                    <th>Qty Available</th>
+                                                    <th>Qty to Deliver</th>                                                 
+                                                  </tr>
+                                                  <tbody>
+                                                {% set count = namespace(value=1) %}
+                                                {%  for good in goods %}
+                                                    <tr>
+                                                        <td align="center"><input type="checkbox" class="form-control" name="Item_{{count.value}}" value="{{good.SKU}}" /> </td>
+                                                        <td>{{good.SKU}}</td>
+                                                        <td>{{good.GOOD_DESC}}</td>
+                                                        <td>{{good.UNIT_DESC}}</td>
+                                                        <td>{{good.AVAI_QUAN}}</td>
+                                                        <td><input type="text" class="form-control" name="quantity_{{count.value}}" placeholder="" width="2" /></td>
+                                                    </tr>
+                                                    {% set count.value = count.value + 1 %}
+                                                {% endfor %}
+                                                    <input type="hidden" name="totalItems" value="{{count.value}}" />
+                                                </tbody>
+                                                </thead>
+                                            </table>
+                                        </div>
+
+                                        <div class="span8 margintop3 form-group">
+                                            <div class="validation"></div>
+                                            <p class="text-center">
+                                                <button id="btnSubmit" class="btn btn-large btn-theme margintop10" type="submit">Submit order</button>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+
+                            <div class="bottom-article">
+                 
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <!-- RIGHT MENU OPTIONS -->
+            {% include 'includes/RightMenu.html' %}
+            <!-- END RIGHT MENU OPTIONS -->
+        </div>
+    </div>
+</section>
+
+{% endblock %}

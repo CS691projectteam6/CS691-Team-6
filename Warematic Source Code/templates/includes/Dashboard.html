@@ -1,0 +1,99 @@
+<!-- Section: Dashboard Content -->
+<section id="content">
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+            <!-- Icons for Warehouse Clerk Users Access -->
+            {%  if session.user_profile == 2 or session.user_profile == 3 %}
+                <div class="row">
+                    <div class="span6">
+                        <div class="box aligncenter">
+                            <div class="aligncenter icon">
+                                <i class="icon-briefcase icon-circled icon-64 active"></i>
+                            </div>
+                            <div class="text">
+                                <h6>Warehouse Operations</h6>
+                                <p> Access here to process warehouse pick up orders. </p>
+                                <a href="/ViewWarehouseOrders">Click here</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span6">
+                        <div class="box aligncenter">
+                            <div class="aligncenter icon">
+                                <i class="icon-truck icon-circled icon-64 active"></i>
+                            </div>
+                            <div class="text">
+                                <h6>Delivery Operations</h6>
+                                <p> Access here to process warehouse delivery orders  </p>
+                                <a href="/ViewDeliveryOrders">Click here</a>
+                            </div>
+                        </div>
+                    </div>    
+                </div>
+            {%  endif %}
+            <!-- Icons for General Users Access -->
+            {%  if session.user_profile == 4 %}
+                <div class="row">
+                    <div class="span3">
+                        <div class="box aligncenter">
+                            <div class="aligncenter icon">
+                                <i class="icon-briefcase icon-circled icon-64 active"></i>
+                            </div>
+                            <div class="text">
+                                <h6>Pick Up</h6>
+                                <p> Access here to request a pick up of your goodies. </p>
+                                <a href="/NewPickUpOrder">Click here</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span3">
+                        <div class="box aligncenter">
+                            <div class="aligncenter icon">
+                                <i class="icon-truck icon-circled icon-64 active"></i>
+                            </div>
+                            <div class="text">
+                                <h6>Delivery</h6>
+                                <p> Access here to request a Delivery of your goodies.  </p>
+                                <a href="/NewDeliveryOrder">Click here</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span3">
+                        <div class="box aligncenter">
+                            <div class="aligncenter icon">
+                                <i class="icon-money icon-circled icon-64 active"></i>
+                            </div>
+                            <div class="text">
+                                <h6>My Warehouse</h6>
+                                <p> Access here to check your warehouse and goodies in stock. </p>
+                                <a href="/MyWarehouse">Click here</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="span3">
+                        <div class="box aligncenter">
+                            <div class="aligncenter icon">
+                                <i class="icon-book icon-circled icon-64 active"></i>
+                            </div>
+                            <div class="text">
+                                <h6>My Orders</h6>
+                                <p> Check and track your orders online. </p>
+                                <a href="/ViewMyOrders">Click here</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {%  endif %}
+            </div>
+        </div>
+        <!-- divider -->
+        <div class="row">
+            <div class="span12">
+                <div class="solidline"> 
+                </div>
+            </div>
+        </div>
+      <!-- end divider -->
+    </div>  
+</section>

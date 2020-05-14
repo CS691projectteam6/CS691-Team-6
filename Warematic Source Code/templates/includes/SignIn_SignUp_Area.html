@@ -1,0 +1,170 @@
+<!-- hidden top area toggle link -->
+<div id="header-hidden-link">
+    <a href="#" class="toggle-link" title="Click me you'll get a surprise" data-target=".hidden-top"><i></i>Open</a>
+</div>
+<!-- end toggle link -->
+
+<!-- SignIn SignUp Area -->
+<div class="row nomargin">
+    <div class="span12">
+        <div class="headnav">
+            <ul>
+            {% if session.logged_in %}
+                <li><a href="/logout">Logout</a></li>
+            {% else %}
+                <li><a href="/register" data-toggle="modal" data-target=""><i class="icon-user"></i> Sign up</a></li>
+                <li><a href="/login" data-toggle="modal" data-target="">Sign in</a></li>
+            {% endif %}
+            </ul>
+        </div>
+
+        <!-- Signup Modal -->
+        <div id="mySignup" class="modal styled hide fade" tabindex="-1" role="dialog" aria-labelledby="mySignupModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 id="mySignupModalLabel">Create an <strong>account</strong></h4>
+            </div>
+            <div class="modal-body">
+                {% from "includes/_formhelpers.html" import render_field %}
+                <form method="POST" action="{{ url_for('register') }}" class="form-horizontal">
+                    <div class="control-group">
+                        <label class="control-label" for="inputEmail">Username (Email)</label>
+                        <div class="controls">
+                            <input type="text" id="inputEmail" placeholder="Email">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="inputSignupPassword">Password</label>
+                        <div class="controls">
+                            <input type="password" id="inputSignupPassword" placeholder="Password">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="inputSignupPassword2">Confirm Password</label>
+                        <div class="controls">
+                            <input type="password" id="inputSignupPassword2" placeholder="Password">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="txtFirstName">First Name</label>
+                        <div class="controls">
+                            <input type="text" name="txtFirstName" id="txtFirstName" placeholder="First Name">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="txtLastName">Last Name</label>
+                        <div class="controls">
+                            <input type="text" name="txtLastName" id="txtLastName" placeholder="Last Name">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="txtPhone">Phone</label>
+                        <div class="controls">
+                            <input type="text" name="txtPhone" id="txtPhone" placeholder="Phone">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="txtStreet">Street</label>
+                        <div class="controls">
+                            <input type="text" name="txtStreet" id="txtStreet" placeholder="Street">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="txtStreet">House</label>
+                        <div class="controls">
+                            <input type="text" name="txtHouse" id="txtHouse" placeholder="House">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="txtStreet">City</label>
+                        <div class="controls">
+                            <input type="text" name="txtCity" id="txtCity" placeholder="City">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="txtStreet">State</label>
+                        <div class="controls">
+                            <input type="text" name="txtState" id="txtState" placeholder="State">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="txtStreet">Zip Code</label>
+                        <div class="controls">
+                            <input type="text" name="txtZip" id="txtZip" placeholder="Zip Code">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+                            <button type="submit" class="btn">Sign up</button>
+                        </div>
+                        <p class="aligncenter margintop20">
+                            Already have an account? <a href="#mySignin" data-dismiss="modal" aria-hidden="true" data-toggle="modal">Sign in</a>
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- end signup modal -->
+
+        <!-- Sign in Modal -->
+        <div id="mySignin" class="modal styled hide fade" tabindex="-1" role="dialog" aria-labelledby="mySigninModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 id="mySigninModalLabel">Login to your <strong>account</strong></h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="control-group">
+                        <label class="control-label" for="inputText">Username</label>
+                        <div class="controls">
+                            <input type="text" id="inputText" placeholder="Email">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <label class="control-label" for="inputSigninPassword">Password</label>
+                        <div class="controls">
+                            <input type="password" id="inputSigninPassword" placeholder="Password">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+                            <button type="submit" class="btn">Sign in</button>
+                        </div>
+                        <p class="aligncenter margintop20">
+                            Forgot password? <a href="#myReset" data-dismiss="modal" aria-hidden="true" data-toggle="modal">Reset</a>
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- end signin modal -->
+
+        <!-- Reset Modal -->
+        <div id="myReset" class="modal styled hide fade" tabindex="-1" role="dialog" aria-labelledby="myResetModalLabel" aria-hidden="true">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h4 id="myResetModalLabel">Reset your <strong>password</strong></h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="control-group">
+                        <label class="control-label" for="inputResetEmail">Email</label>
+                        <div class="controls">
+                            <input type="text" id="inputResetEmail" placeholder="Email">
+                        </div>
+                    </div>
+                    <div class="control-group">
+                        <div class="controls">
+                            <button type="submit" class="btn">Reset password</button>
+                        </div>
+                        <p class="aligncenter margintop20">
+                            We will send instructions on how to reset your password to your inbox
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <!-- end reset modal -->
+
+    </div>
+</div>

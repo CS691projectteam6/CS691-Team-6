@@ -1,0 +1,146 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<section id="inner-headline">
+    <div class="container">
+        <div class="row">
+            <div class="span4">
+                <div class="inner-heading">
+                    <h2>Delivery Orders</h2>
+                </div>
+            </div>
+            <div class="span8">
+                <ul class="breadcrumb">
+                    <li><a href="/"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
+                    <li><a href="/ViewDeliveryOrders">Delivery</a><i class="icon-angle-right"></i></li>
+                    <li class="active">Process Orders</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="content">
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <article>
+                    <div class="row">
+                        <div class="span12">
+                            <div class="post-image">
+                                <div class="post-heading">
+                                    <h4>Process Delivery - <strong> New Order</strong></h4>
+                                </div>
+                                {% include 'includes/_messages.html' %}
+                            </div>
+                            <div class="row">
+                                <div class="span12">
+                                    <form action="" method="post" role="form" class="contactForm">
+                                        <input type="hidden" name="orderStatus" id="" value="{{order.Order_Status}}" />
+                                        <div class="row">
+                                            <div class="span12 form-group">
+                                                <h6>Order Details</h6>
+                                            </div>
+                                            <div class="span4 form-group">
+                                                <label for="orderId">Order Id</label>
+                                                <input type="text" name="orderId" class="form-control" value="{{order.ID_Order}}" readonly />
+                                            </div>
+                                            <div class="span4 form-group">
+                                                <label for="orderDate">Order Date</label>
+                                                <input type="text" name="orderDate" class="form-control" value="{{order.Order_Date}}" readonly />
+                                            </div>
+                                            <div class="span4 form-group">
+                                                <label for="deliveryDate">Delivery Date</label>
+                                                <input type="text" class="form-control" name="deliveryDate" value="{{order.Delivery_Date}}" readonly />
+                                            </div>
+                                            <div class="span12 form-group"> 
+                                                <hr>
+                                            </div>
+                                            <div class="span12 form-group">
+                                                <h6>Client Information</h6>
+                                            </div>
+                                            <div class="span4 form-group">
+                                                <label for="ClientName">Name</label>
+                                                <input type="text" class="form-control" name="ClientName"  value="{{order.Client_Name}}" readonly />
+                                            </div>
+                                            <div class="span4 form-group">
+                                                <label for="ClientPhone">Phone Number</label>
+                                                <input type="text" class="form-control" name="ClientPhone" value="{{order.User_Phone}}" readonly />
+                                            </div>
+                                            <div class="span4 form-group">
+                                                <label for="ClientEmail">Email</label>
+                                                <input type="email" class="form-control" name="ClientEmail" value="{{order.Client_Email}}" readonly />
+                                            </div>
+                                            <div class="span12 form-group"> 
+                                                <hr>
+                                            </div>
+                                            <div class="span12 form-group">
+                                                <h6>Receiver</h6>
+                                            </div>
+                                            <div class="span8 form-group">
+                                                <label for="ReceiverName">Full Name</label>
+                                                <input type="text" class="form-control" name="ReceiverName" value="{{order.Receiver_Name}}" readonly />
+                                            </div>
+                                            <div class="span12 form-group"> 
+                                                <hr>
+                                            </div>
+                                            <div class="span12 form-group">
+                                                <h6>Delivery Address</h6>
+                                            </div>
+                                            <div class="span8 form-group">
+                                                <textarea class="form-control" name="address" rows="2" readonly>{{order.Street_Address}}&nbsp;{{order.House_Address}}&nbsp;{{order.City}}&nbsp;{{order.State}}&nbsp;{{order.ZipCode}}
+                                                </textarea>
+                                            </div>
+                                            <div class="span12 form-group"> 
+                                                <hr>
+                                            </div>
+                                            <div class="span8 form-group">
+                                                <h6>Goods to Deliver</h6>
+                                            </div>
+                            
+                                            <div class="span12 margintop3 form-group">
+                              
+                                                <table class="table table-striped">
+                                                    <thead>
+                                                    <tr>
+                                                        <th>SKU</th>
+                                                        <th>Description</th>
+                                                        <th>Bin #</th>
+                                                        <th>Location</th>
+                                                        <th>Unit</th>
+                                                        <th>Qty to Deliver</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                {%  for good in goods %}
+                                                    <tr>
+                                                        <td> {{good.SKU}} </td>
+                                                        <td> {{good.GOOD_DESC}} </td>
+                                                        <td> {{good.BIN_DESC}} </td>
+                                                        <td> {{good.SLOT_DESC}} </td>
+                                                        <td> {{good.UNIT_DESC}} </td>
+                                                        <td> {{good.QUANT_DELIVER}} </td>
+                                                    </tr>
+                                                {%  endfor %}
+                                                    </tbody>
+                                                </table>
+                                                <p class="text-center">
+                                                    <button class="btn btn-large btn-theme margintop10" type="submit">Process Order</button>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div class="bottom-article">
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

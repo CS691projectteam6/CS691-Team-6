@@ -1,0 +1,85 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<section id="inner-headline">
+    <div class="container">
+        <div class="row">
+            <div class="span4">
+                <div class="inner-heading">
+                    <h2>My Warehouse</h2>
+                </div>
+            </div>
+            <div class="span8">
+                <ul class="breadcrumb">
+                    <li><a href="/"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
+                    <li><a href="/MyWarehouse">Services</a><i class="icon-angle-right"></i></li>
+                    <li class="active">My Warehouse</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="content">
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <article>
+                    <div class="row">
+                        <div class="span12">
+                            <div class="post-image">
+                                <div class="post-heading">
+                                    <h4>List of goods available <strong>in stock</strong></h4>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="span12">
+                                    <form class="form-search">
+                                        <input placeholder="Enter a keyword" type="text" class="input-medium search-query">
+                                        <button type="submit" class="btn btn-square btn-theme">Search</button>
+                                    </form>
+                                    <table class="table table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>SKU</th>
+                                            <th>Description</th>
+                                            <th>Bin #</th>
+                                            <th>Location</th>
+                                            <th>Unit</th>
+                                            <th>Quantity</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                    {%  for good in warehouseGoods %}
+                                        <tr>
+                                            <td> {{good.SKU}} </td>
+                                            <td> {{good.GOOD_DESC}} </td>
+                                            <td> {{good.BIN_DESC}} </td>
+                                            <td> {{good.SLOT_DESC}} </td>
+                                            <td> {{good.UNIT_DESC}} </td>
+                                            <td> {{good.AVAI_QUAN}} </td>
+                                        </tr>
+                                    {% endfor %}
+                                        </tbody>
+                                    </table>
+                                    {% include 'includes/_messages.html' %}
+                                </div>
+                            </div>
+                            <div id="pagination">
+                                <span class="all">Page 1 of 3</span>
+                                <span class="current">1</span>
+                                <a href="#" class="inactive">2</a>
+                                <a href="#" class="inactive">3</a>
+                            </div>
+                            <div class="bottom-article">
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

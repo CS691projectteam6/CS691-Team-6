@@ -1,0 +1,77 @@
+<div class="row">
+    <div class="span4">
+        <div class="logo">
+            <a href="/"><img src="{{ url_for('static', filename='img/WareHouse_Logo.png') }}" alt="" class="logo" /></a>
+            <h1>Automated Warehouse Logistic</h1>
+        </div>
+    </div>
+    <div class="span8">
+        <div class="navbar navbar-static-top">
+            <div class="navigation">
+                <nav>
+                    <ul class="nav topnav">
+                        {% if session.logged_in %}
+                        <li class="dropdown active">
+                            <a href="/">Home </a>
+                        </li>
+                        {% endif %}
+                        {% if session.user_profile == 4 %}
+                        <li class="dropdown">
+                            <a href="#">Services <i class="icon-angle-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/NewPickUpOrder">Pick Up Goods</a></li>
+                                <li><a href="/NewDeliveryOrder">Delivery Goods</a></li>
+                                <li><a href="/ViewMyOrders">My Orders</a></li>
+                                <li><a href="/MyWarehouse">My Warehouse</a></li>
+                                <li><a href="#">Orders History</a></li>
+                                <!--<li><a href="icon-variations.html">Icon variations</a></li>-->
+                                <li class="dropdown">
+                                    <a href="#">My Account <i class="icon-angle-right"></i></a>
+                                    <ul class="dropdown-menu sub-menu-level1">
+                                        <li><a href="#">Update</a></li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </li>
+                        {% endif %}
+                        {% if session.user_profile == 2 or session.user_profile == 3 %}
+                        <li class="dropdown">
+                            <a href="#">Warehouse<i class="icon-angle-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/ViewWarehouseOrders">Process Order ( {{session.count_worders}} )</a></li>
+                                <li><a href="">Reports</a></li>
+                                <!--<li><a href="testimonials.html">Testimonials</a></li>
+                                <li><a href="404.html">404</a></li>-->
+                            </ul>
+                        </li>
+                        {% endif %}
+                        {% if session.user_profile == 2 or session.user_profile == 3 %}
+                        <li class="dropdown">
+                            <a href="#">Delivery<i class="icon-angle-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/ViewDeliveryOrders">Process Order ( {{session.count_dorders}} )</a></li>
+                                <li><a href="">Reports</a></li>
+                                <!--<li><a href="portfolio-4cols.html">Portfolio 4 columns</a></li>
+                                <li><a href="portfolio-detail.html">Portfolio detail</a></li>-->
+                            </ul>
+                        </li>
+                        {% endif %}
+                        <!--<li class="dropdown">
+                            <a href="#">Reports <i class="icon-angle-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="404.html">Orders </a></li>
+                                <li><a href="404.html">Inventory</a></li>
+                                <li><a href="404.html">Invoices</a></li>
+                                <li><a href="404.html">Clients</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="">Admin </a>
+                        </li>-->
+                    </ul>
+                </nav>
+            </div>
+            <!-- end navigation -->
+        </div>
+    </div>
+</div>

@@ -1,0 +1,175 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<!-- TITLE FOR DATA ENTRY FORM: NEW PICK UP ORDERS -->
+<section id="inner-headline">
+    <div class="container">
+        <div class="row">
+            <div class="span4">
+                <div class="inner-heading">
+                    <h2>New Pick Up Order</h2>
+                </div>
+            </div>
+            <div class="span8">
+                <ul class="breadcrumb">
+                    <li><a href="/"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
+                    <li><a href="#">Services</a><i class="icon-angle-right"></i></li>
+                    <li class="active">Pick Up Goods</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- END TITLE FOR DATA ENTRY FORM: NEW PICK UP ORDERS -->
+
+<!-- HERE STARTS THE DATA ENTRY FORM  -->
+<section id="content">
+    <div class="container">
+        <div class="row">
+            <div class="span8">
+                <article>
+                    <div class="row">
+                        <div class="span8">
+                            
+                            <div class="post-image">
+                                <div class="post-heading">
+                                    <h4>Create a new order by filling <strong>the form below</strong></h4>
+                                </div>
+                                {% include 'includes/_messages.html' %}
+                            </div>
+                
+                            <div>
+                                
+                                <form action="" method="post" class="contactForm">
+                                    <input type="hidden" name="numOfItems" id="numOfItems" value="" />
+                                    <div id="sendmessage">Your message has been sent. Thank you!</div>
+                                    <div id="errormessage"></div>
+        
+                                    <div class="row">
+                                        <div class="span8 form-group">
+                                            <h6>Contact Information</h6>
+                                        </div>
+                                        <div class="span8 form-group">
+                                            <input type="text" name="fullname" class="form-control" id="fullname" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" value="{{userInfo.Full_Name}}" readonly />
+                                            <div class="validation"></div>
+                                        </div>
+                                        <div class="span4 form-group">
+                                            <input type="text" class="form-control" name="phone" id="phone" placeholder="Your Phone" data-rule="email" data-msg="Please enter a valid email" value="{{userInfo.User_Phone}}" readonly />
+                                            <div class="validation"></div>
+                                        </div>
+                                        <div class="span4 form-group">
+                                            <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" value="{{userInfo.User_Name}}" readonly />
+                                            <div class="validation"></div>
+                                        </div>
+                                        <div class="span8 form-group">
+                                            <h6>Pick Up Address</h6>
+                                        </div>
+                                        <div class="span4 form-group">
+                                            <input type="text" class="form-control" name="street" id="street" placeholder="Street" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" value="{{userInfo.Street_Address}}" />
+                                            <div class="validation"></div>
+                                        </div>
+                                        <div class="span4 form-group">
+                                            <input type="text" class="form-control" name="house" id="house" placeholder="House, Building, Apartment" data-rule="email" data-msg="Please enter a valid email" value="{{userInfo.House_Address}}" />
+                                            <div class="validation"></div>
+                                        </div>
+                                        <div class="span8 form-group">
+                                            <input type="text" class="form-control" name="city" id="city" placeholder="City" data-rule="email" data-msg="Please enter a valid email" value="{{userInfo.City}}" />
+                                            <div class="validation"></div>
+                                        </div>
+                                        <div class="span4 form-group">
+                                            <select class="form-control" name="state" id="state" style="width: 100%; height: 40px;">
+                                                <option value="">Select...</option>
+                                                {% for state in states %}
+                                                <option value="{{state.ID_State}}" {% if state.ID_State == userInfo.State %} selected {% endif %} > {{state.State_Desc}} </option>
+                                                {% endfor %}
+                                            </select>
+                                            <div class="validation"></div>
+                                        </div>
+                                        <div class="span4 form-group">
+                                            <input type="text" class="form-control" name="zipCode" id="zipCode" placeholder="Zip Code" data-rule="email" data-msg="Please enter a valid email" value="{{userInfo.ZipCode}}" />
+                                            <div class="validation"></div>
+                                        </div>
+                                        <div class="span8 form-group">
+                                            <h6>Pick Up Date</h6>
+                                        </div>
+                                        <div class="span4 form-group">
+                                            <input type="text" class="form-control" name="pickupdate" id="pickupdate" placeholder="Enter pick up date" data-rule="" data-msg="" />
+                                            <div class="validation"></div>
+                                        </div>
+                                
+                                        <div class="span8 form-group">
+                                            <h6>Goods To Pick Up</h6>
+                                        </div>
+                                        <div class="span8 form-group">
+                                            <span><button id="add-item" title="Add new item" class="btn btn-small btn-theme margintop10" type="button">Add Item</button></span>
+                                        </div>
+                                        <div class="span8 margintop3 form-group">
+
+                                            <table id="items" class="table table-striped">
+                                                <thead>
+                                                  <tr>
+                                                    <th>SKU</th>
+                                                    <th>Description</th>
+                                                    <th>Unit</th>
+                                                    <th>Quantity</th>                                                    
+                                                  </tr>
+                                                  <tbody>
+                                                    <tr>
+                                                        <td><input type="text" class="form-control" name="sku1" /></td>
+                                                        <td><input type="text" class="form-control" name="itemdesc1" /></td>
+                                                        <td>
+                                                            <select name="unit1" class="" style="height: 40px;">
+                                                                <option value="" selected>Select...</option>
+                                                                <option value="1">Each</option>
+                                                                <option value="2">Box(5)</option>
+                                                                <option value="3">Box(10)</option>
+                                                                <option value="4">Box(12)</option>
+                                                                <option value="5">Package(5)</option>
+                                                                <option value="6">Package(10)</option>
+                                                                <option value="7">Package(15)</option>
+                                                            </select>
+                                                        </td>
+                                                        <td><input type="text" class="form-control" name="qty1" /></td>
+                                                    </tr>
+                                                </tbody>
+                                                </thead>
+                                            </table>
+                                        </div>
+
+                                        <div class="span8 margintop3 form-group">
+                                            <div class="validation"></div>
+                                            <p class="text-center">
+                                                <button id="btnSubmit" class="btn btn-large btn-theme margintop10" type="submit">Submit order</button>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </form>
+                                <script>
+                                    var numItem = 1;
+                                    $( "#add-item" ).click(function() {
+                                        numItem++;
+                                        $("#items").append('<tr><td><input type="text" class="form-control" name="sku'+ numItem + '" /></td><td><input type="text" class="form-control" name="itemdesc'+ numItem + '" /></td><td><select name="unit'+ numItem +'" class="form-control" style="height: 40px;"><option value="">Select...</option><option value="1">Each</option><option value="2">Box(5)</option><option value="3">Box(10)</option><option value="4">Box(12)</option><option value="5">Package(5)</option><option value="6">Package(10)</option><option value="7">Package(15)</option></select></td><td><input type="text" class="form-control" name="qty'+ numItem +'" /></td></tr>');
+                                    });
+                                    $( "#btnSubmit" ).click(function() {
+                                        $("#numOfItems").val(numItem);
+                                    });
+                                </script>
+
+                            </div>
+
+                            <div class="bottom-article">
+                 
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <!-- RIGHT MENU OPTIONS -->
+            {% include 'includes/RightMenu.html' %}
+            <!-- END RIGHT MENU OPTIONS -->
+        </div>
+    </div>
+</section>
+
+{% endblock %}

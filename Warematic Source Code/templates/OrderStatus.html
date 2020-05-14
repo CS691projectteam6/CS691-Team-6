@@ -1,0 +1,93 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<section id="inner-headline">
+    <div class="container">
+        <div class="row">
+            <div class="span4">
+                <div class="inner-heading">
+                    <h2>Order Status</h2>
+                </div>
+            </div>
+            <div class="span8">
+                <ul class="breadcrumb">
+                    <li><a href="/"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
+                    <li><a href="/MyWarehouse">Services</a><i class="icon-angle-right"></i></li>
+                    <li class="active">Order Status</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="content">
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <article>
+                    <div class="row">
+                        <div class="span12">
+                            <div class="post-image">
+                                <div class="post-heading">
+                                    <h4>Track your order <strong>online</strong></h4>
+                                </div>
+                                <div class="post-heading">
+                                    <h4>Order details </h4>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="span12">
+                                    <h5>Order Id</h5>
+                                    <form>
+                                        <input type="text" value={{order.ID_Order}}>
+                                    </form>
+                                    <h5>Order Date</h5>
+                                    <form>
+                                        <input type="text" value={{order.Order_Date}}>
+                                    </form>
+                                    <h5>Order Type</h5>
+                                    <form>
+                                        <input type="text" value={{order.ID_Order_Type}}>
+                                    </form>
+                                    <table class="table table-hover">
+                                        <thead>
+                                            <tr>
+                                                <th>Order Status</th>
+                                                <th>Date</th>
+                                               
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {%  for order in OrderTracking %}
+                                            <tr>
+                                                <td> {{order.ID_Order_Status}} </td>
+                                                <td> {{order.Process_Date}} </td>
+                                                
+                                            </tr>
+                                            {% endfor %}
+                                        </tbody>
+                                    </table>
+                                    {% include 'includes/_messages.html' %}
+                                </div>
+                            </div>
+                            <div id="pagination">
+                                <span class="all">Page 1 of 3</span>
+                                <span class="current">1</span>
+                                <a href="#" class="inactive">2</a>
+                                <a href="#" class="inactive">3</a>
+                            </div>
+                            <div class="bottom-article">
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <!-- RIGHT MENU OPTIONS -->
+            {% include 'includes/RightMenu.html' %}
+            <!-- END RIGHT MENU OPTIONS -->
+        </div>
+    </div>
+</section>
+
+{% endblock %}

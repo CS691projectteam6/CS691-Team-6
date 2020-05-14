@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>WareMatic App</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <!-- JQuery -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+        <!-- css -->
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Noto+Serif:400,400italic,700|Open+Sans:300,400,600,700" /> 
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/bootstrap-responsive.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/fancybox/jquery.fancybox.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/jcarousel.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/flexslider.css') }}" />
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}" />
+
+        <!-- Theme skin -->
+        <link rel="stylesheet" href="{{ url_for('static', filename='skins/default.css') }}"  />
+        <!-- Fav and touch icons -->
+        <link rel="apple-touch-icon-precomposed" sizes="144x144" href="{{ url_for('static', filename='ico/apple-touch-icon-144-precomposed.png') }}" />
+        <link rel="apple-touch-icon-precomposed" sizes="114x114" href="{{ url_for('static', filename='ico/apple-touch-icon-114-precomposed.png') }}" />
+        <link rel="apple-touch-icon-precomposed" sizes="72x72"   href="{{ url_for('static', filename='ico/apple-touch-icon-72-precomposed.png') }}" />
+        <link rel="apple-touch-icon-precomposed" href="{{ url_for('static', filename='ico/apple-touch-icon-57-precomposed.png') }}" />
+        <link rel="shortcut icon" href="{{ url_for('static', filename='ico/favicon.png') }}" />
+
+    </head>
+    <body>
+        <div id="wrapper">
+            {% include 'includes/ToggleTop.html' %}
+            <header>
+                <div class="container">
+                    {% include 'includes/SignIn_SignUp_Area.html' %}
+                    {% include 'includes/NavBar.html' %}
+                </div>
+            </header>
+
+            {% block body %}
+        
+            {% endblock %}
+            
+            {% include 'includes/Twitter_Area.html' %}
+            <footer>
+                {% include 'includes/Footer_Area.html' %}
+            </footer>
+        </div>
+        <a href="#" class="scrollup"><i class="icon-chevron-up icon-square icon-32 active"></i></a>
+    <!-- javascript -->
+    <script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.easing.1.3.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jcarousel/jquery.jcarousel.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.fancybox.pack.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.fancybox-media.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/google-code-prettify/prettify.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/portfolio/jquery.quicksand.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/portfolio/setting.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.flexslider.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.nivo.slider.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/modernizr.custom.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.ba-cond.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/jquery.slitslider.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/animate.js') }}"></script>
+
+    <!-- Template Custom JavaScript File -->
+    <script src="{{ url_for('static', filename='js/custom.js') }}"></script>
+
+    </body>
+</html>
