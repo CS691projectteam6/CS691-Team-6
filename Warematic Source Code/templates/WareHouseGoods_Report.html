@@ -5,16 +5,16 @@
 <section id="inner-headline">
     <div class="container">
         <div class="row">
-            <div class="span4">
+            <div class="span7">
                 <div class="inner-heading">
-                    <h2>Delivery Orders</h2>
+                    <h2>Warehouse Storaged Merchandise</h2>
                 </div>
             </div>
-            <div class="span8">
+            <div class="span5">
                 <ul class="breadcrumb">
                     <li><a href="/"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
-                    <li><a href="/ViewDeliveryOrders">Delivery</a><i class="icon-angle-right"></i></li>
-                    <li class="active">View Delivery Orders</li>
+                    <li><a href="">Warehouse</a><i class="icon-angle-right"></i></li>
+                    <li class="active">Report - Storaged Merchandise </li>
                 </ul>
             </div>
         </div>
@@ -29,39 +29,37 @@
                     <div class="row">
                         <div class="span12">
                             <div class="post-image">
-                                <div class="post-heading">
-                                    <h4>Delivery Orders <strong>to process</strong></h4>
+                                <div class="post-heading" style="text-align: center;">
+                                    <h3>Storaged <strong>Merchandise</strong> Report</h3>
                                 </div>
                                 {% include 'includes/_messages.html' %}
                             </div>
                             <div class="row">
                                 <div class="span12">
                                     <form class="form-search">
-                                        <input placeholder="Enter a keyword" type="text" class="input-medium search-query">
+                                        <input placeholder="Enter a keyword" name="order_id" type="text" class="input-medium search-query">
                                         <button type="submit" class="btn btn-square btn-theme">Search</button>
                                     </form>
-                                    <table class="table table-hover">
+                                    <table class="table table-bordered table-condensed table-hover">
                                         <thead>
-                                        <tr>
-                                            <th>Order Id</th>
-                                            <th>Client Name</th>
-                                            <th>Email</th>
-                                            <th>Order Date</th>
-                                            <th>Delivery Date</th>
-                                            <th>Status</th>
-                                            <th>Action</th>
+                                        <tr style="background-color:#f5f4f3;">
+                                            <th>SKU</th>
+                                            <th>Description</th>
+                                            <th>Bin</th>
+                                            <th>Row - Slot</th>
+                                            <th>Unit</th>
+                                            <th>Quantity</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                    {%  for order in deliveryOrders %}
+                                    {%  for product in products %}
                                         <tr>
-                                            <td> {{order.ID_Order}}     </td>
-                                            <td> {{order.Client_Name}}  </td>
-                                            <td> {{order.Client_Email}} </td>
-                                            <td> {{order.Order_Date}}   </td>
-                                            <td> {{order.Delivery_Date}}  </td>
-                                            <td> {{order.Order_Status}} </td>
-                                            <td> <a href="/Detail_DOrder/{{order.ID_Order}}">Process</a></td>
+                                            <td title="{{product.User_Name}}"> {{product.SKU}} </td>
+                                            <td> {{product.GOOD_DESC}} </td>
+                                            <td> {{product.BIN_DESC}} </td>
+                                            <td> {{product.SLOT_DESC}} </td>
+                                            <td> {{product.UNIT_DESC}} </td>
+                                            <td> {{product.AVAI_QUAN}} </td>
                                         </tr>
                                     {%  endfor %}
                                         </tbody>
@@ -75,7 +73,6 @@
                                 <a href="#" class="inactive">3</a>
                             </div>
                             <div class="bottom-article">
-                 
                             </div>
                         </div>
                     </div>

@@ -22,65 +22,118 @@
 </section>
 
 <section id="content">
-    <div class="container">
-      <div class="row">
-        <div class="span8">
-          <article>
-            <div class="row">
-              <div class="span8">
-                <div class="post-image">
-                  <div class="post-heading">
-                    <h4>Track your order <strong>online</strong></h4>
+  <div class="container">
+    <div class="row">
+      <div class="span8">
+        <article>
+          <div class="row">
+            <div class="span8">
+              <div class="post-image">
+                <div class="post-heading">
+                  <h4>Track your order <strong>online</strong></h4>
+                </div>
+                {% include 'includes/_messages.html' %}
+              </div>
+              <div class="">
+                
+                <div class="accordion" id="accordion1">
+                  <div class="accordion-group">
+                      <div class="accordion-heading">
+                          <a class="accordion-toggle active" data-toggle="collapse" data-parent="#accordion1" href="#collapseOne">
+                              <i class="icon-minus"></i> Active Orders Search Engine
+                          </a>
+                      </div>
+                      <div id="collapseOne" class="accordion-body collapse in">
+                          <div class="accordion-inner">
+                              
+                            <form class="form-search" action="" method="POST">
+                              <input type="text" name="orderId" placeholder="Order ID" class="input-medium search-query">&nbsp;&nbsp;
+                              <select class="input-medium search-query" name="orderType" style="width: 23%;">
+                                <option value="0">Order Type...</option>
+                          {%  for oType in oTypes %}
+                                <option value="{{oType.ID_Order_Type}}" > {{oType.Desc_Type}} </option>
+                          {%  endfor %}
+                              </select>&nbsp;&nbsp;
+                              <select class="input-medium search-query" name="orderStatus" style="width: 23%;">
+                                <option value="0">Status...</option>
+                          {%  for oStat in oStatus %}
+                                <option value="{{oStat.ID_Order_Status}}" > {{oStat.Description}} </option>
+                          {%  endfor %}
+                              </select>
+                              <br><br>
+                              <input type="text" name="iniDate" placeholder="Ini Order Date" class="input-medium search-query">&nbsp;-
+                              <input type="text" name="endDate" placeholder="End Order Date" class="input-medium search-query">&nbsp;&nbsp;
+                              <button type="submit" class="btn btn-square btn-theme">Search</button>
+                            </form>
+                          
+                          </div>
+                      </div>
                   </div>
-                  
                 </div>
-                <div class="">
-                  <form class="form-search">
-                    <input placeholder="Enter a keyword" type="text" class="input-medium search-query">
-                    <button type="submit" class="btn btn-square btn-theme">Search</button>
-                  </form>
-                  <table class="table table-hover">
-                    <thead>
-                      <tr>
-                        <th>Order Id</th>
-                        <th>Type</th>
-                        <th>Date</th>
-                        <th>Status</th>
-                        <th>Action</th>
-                        <th>Track</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                {%  for order in ClientOrders %}
-                        <tr>
-                            <td> {{order.ID_Order}} </td>
-                            <td> {{order.Desc_Type}} </td>
-                            <td> {{order.Order_Date}} </td>
-                            <td> {{order.Order_Status}} </td>
-                            <td> <a href="#">Update</a></td>
-                            <td> <a href="/ViewMyOrderTracking/{{order.ID_Order}}">See Tracking</a></td>
-                        </tr>
-                {% endfor %}
-                    </tbody>
-                  </table>
-                  {% include 'includes/_messages.html' %}
-                </div>
-                <div class="row">
-                    <hr>
-                </div>
+
+                
+                <table class="table table-hover">
+                  <thead>
+                    <tr>
+                      <th>Order Id</th>
+                      <th>Type</th>
+                      <th>Date</th>
+                      <th>Status</th>
+                      <th>Track</th>
+                      <th colspan="2">Action</th> 
+                    </tr>
+                  </thead>
+                  <tbody>
+              {%  for order in ClientOrders %}
+                    <tr>
+                      <td> {{order.ID_Order}} </td>
+                      <td> {{order.Desc_Type}} </td>
+                      <td> {{order.Order_Date}} </td>
+                      <td> {{order.Order_Status}} </td>
+                      <td> <a href="/ViewMyOrderTracking/{{order.ID_Order}}">See Tracking</a></td>
+                  {%  if order.ID_Order_Status == 1 %}
+                      <td> <a href="/UpdateOrderDetail/{{order.ID_Order}}">Update</a></td>
+                      <td>
+                          <a href="/DeleteOrder/{{order.ID_Order}}" data-dismiss="modal" aria-hidden="true" data-toggle="modal" data-target="#deleteModal{{order.ID_Order}}">Delete</a>
+                      </td>
+                  {%  else  %}
+                      <td colspan="2">&nbsp;</td>
+                  {%  endif %}
+                    </tr>
+                    <div id="deleteModal{{order.ID_Order}}" class="modal styled hide fade" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                      <div class="modal-header">
+                          <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                          <h4 id="deleteModalLabel">Delete <strong>Order?</strong></h4>
+                      </div>
+                      <div class="modal-body">
+                          <form action="{{ url_for('DeleteOrder', order_id=order.ID_Order) }}" method="POST" class="form-horizontal">
+                              <input type="hidden" name="orderId_toDelete" value="{{order.ID_Order}}">
+                              <div class="control-group">
+                                  <p class="aligncenter margintop20">
+                                      <h6>Are you sure you want to delete order <strong>#{{order.ID_Order}}</strong>?</h6>
+                                  </p>
+                                  <div style="text-align: center;">
+                                      <input type="submit" class="btn btn-medium" value="Delete"> 
+                                  </div>
+                              </div>
+                          </form>
+                      </div>
+                    </div>
+              {%  endfor %}
+                  </tbody>
+                </table>
+              </div>
+              <div class="row">
+                <hr>
               </div>
             </div>
-          </article>
-          
-          
-        </div>
-
-        <!-- RIGHT MENU OPTIONS -->
-        {% include 'includes/RightMenu.html' %}
-        <!-- END RIGHT MENU OPTIONS -->
-        
+          </div>
+        </article>
       </div>
+      <!-- RIGHT MENU OPTIONS -->
+      {% include 'includes/RightMenu.html' %}
+      <!-- END RIGHT MENU OPTIONS -->
     </div>
+  </div>
 </section>
-
 {% endblock %}

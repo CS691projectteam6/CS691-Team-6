@@ -1,0 +1,220 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<section id="inner-headline">
+    <div class="container">
+        <div class="row">
+            <div class="span4">
+                <div class="inner-heading">
+                    <h2>Order Update</h2>
+                </div>
+            </div>
+            <div class="span8">
+                <ul class="breadcrumb">
+                    <li><a href="/"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
+                    <li><a href="/ViewMyOrders">My Orders</a><i class="icon-angle-right"></i></li>
+                    <li class="active">Order Update</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="content">
+    <div class="container">
+        <div class="row">
+            <div class="span8">
+                <article>
+                    <div class="row">
+                        <div class="span8">
+                            <div class="post-image">
+                                <div class="post-heading">
+                                    <h4>Modify your <strong>order</strong></h4>
+                                </div>
+                                {% include 'includes/_messages.html' %}
+                            </div>
+                            <form action="" method="post" class="contactForm">
+                            <input type="hidden" name="numOfItems" id="numOfItems" value="" />
+                            <div class="row">
+                                <div class="span8 form-group">
+                                    <h6>Order Details</h6>
+                                </div>
+                                <div class="span4 form-group">
+                                    <label for="orderId">Order Id</label>
+                                    <input type="text" name="orderId" class="form-control" placeholder="" value="{{order.ID_Order}}" readonly />
+                                </div>
+                                <div class="span4 form-group">
+                                    <label for="orderDate">Order Date</label>
+                                    <input type="text" name="orderDate" class="form-control" placeholder="" value="{{order.Order_Date}}" readonly />
+                                </div>
+                                <div class="span8 form-group">
+                                    <label for="orderType">Order Type</label>
+                                    <input type="text" name="orderType" class="form-control" placeholder="" value="{{order.Order_Type}}" readonly />
+                                </div>
+                                <div class="span4 form-group">  
+                                    <label for="pickupDate">PickUp Date Schedule</label>
+                                    <input type="text" name="pickupDate" class="form-control" placeholder="" value="{{order.PickUp_Date_YYYYMMDD}}" {% if order.ID_Order_Type == 2 %} readonly {% endif %} />
+                                </div>
+                                <div class="span4 form-group">
+                                    <label for="deliveryDate">Delivery Date Schedule</label>
+                                    <input type="text" name="deliveryDate" class="form-control" placeholder="" value="{{order.Delivery_Date_YYYYMMDD}}" {% if order.ID_Order_Type == 1 %} readonly {% endif %} />
+                                </div>
+                            </div>
+
+                        {%  if order.ID_Order_Type == 2 %}
+                            <div class="row">
+                                <div class="span8 form-group">
+                                    <h6>Receiver</h6>
+                                </div>
+                                <div class="span4 form-group">
+                                    <input type="text" name="receiver" class="form-control" placeholder="Street" value="{{order.Receiver_Name}}"  />
+                                </div>
+                            </div>
+                        {%  endif %}
+
+                            <div class="row">
+                                <div class="span8 form-group">
+                            {%  if order.ID_Order_Type == 1 %}
+                                    <h6>Pick Up Address</h6>
+                            {%  else %}
+                                    <h6>Delivery Address</h6>
+                            {%  endif %}
+                                </div>
+                                <div class="span4 form-group">
+                                    <input type="text" name="street" class="form-control" placeholder="Street" value="{{order.Street_Address}}"  />
+                                </div>
+                                <div class="span4 form-group">
+                                    <input type="text" class="form-control" name="house" placeholder="House, Building, Apartment" value="{{order.House_Address}}" />
+                                    <div class="validation"></div>
+                                </div>
+                                <div class="span8 form-group">
+                                    <input type="text" class="form-control" name="city" placeholder="City" value="{{order.City}}" />
+                                    <div class="validation"></div>
+                                </div>
+                                <div class="span4 form-group">
+                                    <select class="form-control" name="state" style="width: 100%; height: 40px;">
+                                        <option value="">Select...</option>
+                                        {% for state in states %}
+                                        <option value="{{state.ID_State}}" {% if state.ID_State == order.State_Code %} selected {% endif %} > {{state.State_Desc}} </option>
+                                        {% endfor %}
+                                    </select>
+                                    <div class="validation"></div>
+                                </div>
+                                <div class="span4 form-group">
+                                    <input type="text" class="form-control" name="zipCode" placeholder="Zip Code" value="{{order.ZipCode}}" />
+                                    <div class="validation"></div>
+                                </div>    
+                            </div>
+                            <div class="row">
+                                <div class="span8 form-group">
+                                    <h6>Order Goods</h6>
+                                </div>
+                                <div class="span8 form-group">
+                                    <span><button id="add-item" title="Add new item" class="btn btn-small btn-theme margintop10" type="button">Add Item</button></span>
+                                </div>
+                                <div class="span8 margintop3 form-group">
+                                    <table id="items" class="table table-striped">
+                                        <thead>
+                                          <tr>
+                                            <th>#</th>
+                                            <th>SKU</th>
+                                            <th>Description</th>
+                                            <th>Unit</th>
+                                            <th>Quantity</th>                                                
+                                          </tr>
+                                          <tbody id="tbl_items_body">
+                                        {% set count = namespace(value=1) %}
+                                        {%  for good in goods %}
+                                            <tr id="rec_{{count.value}}">
+                                                <td><span class="sn">{{count.value}}</span>.</td>
+                                                <td><input type="text" class="form-control" name="SKU[]" placeholder="SKU" value="{{good.SKU}}" /></td>
+                                                <td><input type="text" class="form-control" name="Good_Desc[]" placeholder="Description" value="{{good.Good_Desc}}" /></td>
+                                                <td>
+                                                    <select class="form-control" name="Unit[]" style="height: 40px;">
+                                                        <option value="">Select...</option>
+                                                        {% for unit in units %}
+                                                        <option value="{{unit.ID_Good_Unit}}" {% if unit.ID_Good_Unit == good.ID_Good_Unit %} selected {% endif %} > {{unit.Unit_Description}} </option>
+                                                        {% endfor %}
+                                                    </select>
+                                                </td>
+                                                <td><input type="text" class="form-control" name="Quantity[]" placeholder="Quantity" value="{{good.Quan_Order}}" /></td>
+                                                <td><a class="aligncenter delete-record" data-id="{{count.value}}" title="Delete"><i class="icon-rounded icon-trash icon-32"></i></a></td>
+                                            </tr>
+                                            {% set count.value = count.value + 1 %}
+                                        {% endfor %}
+                                            <input type="hidden" name="totalItems" value="{{count.value}}" />
+                                        </tbody>
+                                        </thead>
+                                    </table>
+                                </div>
+                                <div class="span8 margintop3 form-group">
+                                    <div class="validation"></div>
+                                    <p class="text-center">
+                                        <button id="btnSubmit" class="btn btn-large btn-theme margintop10" type="submit">Update order</button>
+                                    </p>
+                                </div>
+                            </div>
+                            </form>
+                            <script>
+                                var numItem = {{count.value}};
+                                numItem--;
+                                $( "#add-item" ).click(function() {
+                                    numItem++;
+                                    var html = '<tr id="rec_' + numItem + '">';
+                                        html += '<td><span class="sn">' + numItem + '</span>.</td>';
+                                        html += '<td><input type="text" class="form-control" name="SKU[]" /></td>';
+                                        html += '<td><input type="text" class="form-control" name="Good_Desc[]" /></td>';
+                                        html += '<td><select name="Unit[]" class="form-control" style="height: 40px;">';
+                                        html += '<option value="">Select...</option>';
+                                        html += '<option value="1">Each</option>';
+                                        html += '<option value="2">Box(5)</option>';
+                                        html += '<option value="3">Box(10)</option>';
+                                        html += '<option value="4">Box(12)</option>';
+                                        html += '<option value="5">Package(5)</option>';
+                                        html += '<option value="6">Package(10)</option>';
+                                        html += '<option value="7">Package(15)</option>';
+                                        html += '</select></td>';
+                                        html += '<td><input type="text" class="form-control" name="Quantity[]" /></td>';
+                                        html += '<td><a class="aligncenter delete-record" data-id="' + numItem + '" title="Delete"><i class="icon-rounded icon-trash icon-32"></i></a></td>';
+                                        html += '</tr>'
+                                    $("#items").append(html);
+                                });
+                                $( "#btnSubmit" ).click(function() {
+                                    $("#numOfItems").val(numItem);
+                                });
+
+                                jQuery(document).delegate('a.delete-record', 'click', function(e) {
+                                    //e.preventDefault();    
+                                    var didConfirm = confirm("Are you sure You want to delete");
+                                    if (didConfirm == true) {
+                                        var id = jQuery(this).attr('data-id');
+                                        var targetDiv = jQuery(this).attr('targetDiv');
+                                        numItem--;
+                                        jQuery('#rec_' + id).remove();
+                                                         
+                                        //regnerate index number on table
+                                        $('#tbl_items_body tr').each(function(index) {
+                                            $(this).find('span.sn').html(index+1);
+                                        });
+                                        return true;
+                                    } else {
+                                        return false;
+                                    }
+                                });
+                            </script>
+                            <div class="span8">
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <!-- RIGHT MENU OPTIONS -->
+            {% include 'includes/RightMenu.html' %}
+            <!-- END RIGHT MENU OPTIONS -->
+        </div>
+    </div>
+</section>
+
+{% endblock %}

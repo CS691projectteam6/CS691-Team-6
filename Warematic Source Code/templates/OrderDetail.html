@@ -51,7 +51,70 @@
                                         <label for="orderType">Order Type</label>
                                         <input type="text" name="orderType" class="form-control" placeholder="" value="{{order.Order_Type}}" readonly />
                                     </div>
+                                    <div class="span4 form-group">
+                                        <label for="orderType">PickUp Date Schedule</label>
+                                        <input type="text" name="pickupDate" class="form-control" placeholder="" value="{{order.PickUp_Date}}" readonly />
+                                    </div>
+                                    <div class="span4 form-group">
+                                        <label for="orderType">Delivery Date Schedule</label>
+                                        <input type="text" name="pickupDate" class="form-control" placeholder="" value="{{order.Delivery_Date}}" readonly />
+                                    </div>
                                 </form>
+                            </div>
+                            <div class="row">
+                                <div class="span8">
+                                {%  if (order.ID_Order_Type == 1) %}
+                                        <h6>Pick Up Details</h6>
+                                {%  else %}
+                                        <h6>Delivery Details</h6>
+                                {%  endif %}
+                                    <div class="accordion" id="accordion1">
+                                        <div class="accordion-group">
+                                            <div class="accordion-heading">
+                                                <a class="accordion-toggle active" data-toggle="collapse" data-parent="#accordion1" href="#collapseOne">
+                                                    <i class="icon-minus"></i> 
+                                                {%  if (order.ID_Order_Type == 1) %}
+                                                        Pick Up Adress
+                                                {%  else %}
+                                                        Delivery Address
+                                                {%  endif %}
+                                                </a>
+                                            </div>
+                                            <div id="collapseOne" class="accordion-body collapse in">
+                                                <div class="accordion-inner">
+                                                    
+                                                    <table class="table table-hover">
+                                                        <thead>
+                                                        <tr>
+                                                    {%  if (order.ID_Order_Type == 2) %}
+                                                            <th>Receiver</th>
+                                                    {%  endif %}
+                                                            <th>Street</th>
+                                                            <th>House / Building</th>
+                                                            <th>City</th>
+                                                            <th>State</th>
+                                                            <th>Zip Code</th>
+                                                        </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr>
+                                                        {%  if (order.ID_Order_Type == 2) %}
+                                                                <td> {{order.Receiver_Name}} </td>
+                                                        {%  endif %}
+                                                                <td> {{order.Street_Address}} </td>
+                                                                <td> {{order.House_Address}} </td>
+                                                                <td> {{order.City}} </td>
+                                                                <td> {{order.State}} </td>
+                                                                <td> {{order.ZipCode}} </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <div class="row">
                                 <div class="span8">
@@ -59,11 +122,11 @@
                                     <div class="accordion" id="accordion2">
                                         <div class="accordion-group">
                                             <div class="accordion-heading">
-                                                <a class="accordion-toggle active" data-toggle="collapse" data-parent="#accordion2" href="#collapseOne">
+                                                <a class="accordion-toggle active" data-toggle="collapse" data-parent="#accordion2" href="#collapseTwo">
                                                     <i class="icon-minus"></i> Goods List
                                                 </a>
                                             </div>
-                                            <div id="collapseOne" class="accordion-body collapse in">
+                                            <div id="collapseTwo" class="accordion-body collapse in">
                                                 <div class="accordion-inner">
                                                     
                                                     <table class="table table-hover">
@@ -95,7 +158,7 @@
                             </div>
                             <div class="row">
                                 <div class="span8">
-                                    <h6>Order Tracking</h6>
+                                    <h6>Tracking</h6>
                                     <table class="table table-striped">
                                         <thead>
                                         <tr>

@@ -1,0 +1,110 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<section id="inner-headline">
+    <div class="container">
+        <div class="row">
+            <div class="span4">
+                <div class="inner-heading">
+                    <h2>Orders History</h2>
+                </div>
+            </div>
+            <div class="span8">
+                <ul class="breadcrumb">
+                    <li><a href="/"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
+                    <li><a href="/ViewMyOrders">Services</a><i class="icon-angle-right"></i></li>
+                    <li class="active">Orders History</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="content">
+    <div class="container">
+        <div class="row">
+            <div class="span8">
+                <article>
+                    <div class="row">
+                        <div class="span8">
+                            <div class="post-image">
+                                <div class="post-heading">
+                                    <h4>Check your <strong>completed</strong> orders</h4>
+                                </div>
+                                {% include 'includes/_messages.html' %}
+                            </div>
+                            <div class="">
+                                
+                                <div class="accordion" id="accordion1">
+                                    <div class="accordion-group">
+                                        <div class="accordion-heading">
+                                            <a class="accordion-toggle active" data-toggle="collapse" data-parent="#accordion1" href="#collapseOne">
+                                                <i class="icon-minus"></i> Orders History Search Engine
+                                            </a>
+                                        </div>
+                                        <div id="collapseOne" class="accordion-body collapse in">
+                                            <div class="accordion-inner">
+                                                
+                                              <form class="form-search" action="" method="POST">
+                                                <input type="text" name="orderId" placeholder="Order ID" class="input-medium search-query">&nbsp;&nbsp;
+                                                <select class="input-medium search-query" name="orderType" style="width: 23%;">
+                                                  <option value="0">Order Type...</option>
+                                            {%  for oType in oTypes %}
+                                                  <option value="{{oType.ID_Order_Type}}" > {{oType.Desc_Type}} </option>
+                                            {%  endfor %}
+                                                </select>&nbsp;&nbsp;
+                                                <select class="input-medium search-query" name="orderStatus" style="width: 23%;">
+                                                  <option value="0">Status...</option>
+                                            {%  for oStat in oStatus %}
+                                                  <option value="{{oStat.ID_Order_Status}}" > {{oStat.Description}} </option>
+                                            {%  endfor %}
+                                                </select>
+                                                <br><br>
+                                                <input type="text" name="iniDate" placeholder="Ini Order Date" class="input-medium search-query">&nbsp;-
+                                                <input type="text" name="endDate" placeholder="End Order Date" class="input-medium search-query">&nbsp;&nbsp;
+                                                <button type="submit" class="btn btn-square btn-theme">Search</button>
+                                              </form>
+                                            
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <table class="table table-hover">
+                                    <thead>
+                                        <tr>
+                                            <th>Order Id</th>
+                                            <th>Type</th>
+                                            <th>Date</th>
+                                            <th>Status</th>
+                                            <th colspan="2">Action</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                {%  for order in ClientOrdersHist %}
+                                        <tr>
+                                            <td> {{order.ID_Order}} </td>
+                                            <td> {{order.Desc_Type}} </td>
+                                            <td> {{order.Order_Date_F}} </td>
+                                            <td> {{order.Order_Status}} </td>
+                                            <td> <a href="/OrderDetail/{{order.ID_Order}}">See Details</a></td>
+                                        </tr>
+                                {%  endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="row">
+                                <hr>
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <!-- RIGHT MENU OPTIONS -->
+            {% include 'includes/RightMenu.html' %}
+            <!-- END RIGHT MENU OPTIONS -->
+        </div>
+    </div>
+</section>
+{% endblock %}

@@ -2,6 +2,21 @@
 
 {% block body %}
 
+<style>
+    div#loading {       
+        display: none;
+        background-color: #f9f9f9;
+        width: 280px;
+        border: 8px solid #f03c02;
+        border-radius: 10px;
+        padding: 15px;
+        cursor: wait;
+        position: absolute;
+        left: 36%;
+        z-index: 1000;
+    }
+</style>
+
 <section id="inner-headline">
     <div class="container">
         <div class="row">
@@ -34,7 +49,7 @@
                                 </div>
                                 {% include 'includes/_messages.html' %}
                             </div>
-                            <div class="row">
+                            <div id="contentForm" class="row">
                                 <div class="span12">
                                     <form action="" method="post" role="form" class="contactForm">
                                         <input type="hidden" name="orderStatus" id="" value="{{order.Order_Status}}" />
@@ -126,14 +141,18 @@
                                                     </tbody>
                                                 </table>
                                                 <p class="text-center">
-                                                    <button class="btn btn-large btn-theme margintop10" type="submit">Process Order</button>
+                                                    <button class="btn btn-large btn-theme margintop10" type="submit" onclick="loading();">Process Order</button>
                                                 </p>
                                             </div>
                                         </div>
                                     </form>
                                 </div>
                             </div>
-                            <div class="bottom-article">
+                            <div id="loading">
+                                <img src="/static/img/circle-loader.gif" />
+                                &nbsp;&nbsp;&nbsp;Loading...&nbsp;&nbsp;&nbsp;
+                            </div>
+                            <div class="">
                             </div>
                         </div>
                     </div>
@@ -142,5 +161,15 @@
         </div>
     </div>
 </section>
+
+<script type="text/javascript">
+    // <![CDATA[
+    function loading(){
+        //$("#loading").show();
+        $("#loading").css("display", "inline-block");
+        $("#contentForm").hide();         
+    }
+    // ]]>
+</script>
 
 {% endblock %}

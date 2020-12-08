@@ -1,0 +1,81 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<section id="inner-headline">
+    <div class="container">
+        <div class="row">
+            <div class="span7">
+                <div class="inner-heading">
+                    <h2>Statistics</h2>
+                </div>
+            </div>
+            <div class="span5">
+                <ul class="breadcrumb">
+                    <li><a href="/"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
+                    <li><a href="">Warehouse</a><i class="icon-angle-right"></i></li>
+                    <li class="active">Statistics - Active Orders </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="content">
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <article>
+                    <div class="row">
+                        <div class="span12">
+                            <div class="post-image">
+                                <div class="post-heading" style="text-align: center;">
+                                    <h3>Active <strong>Orders</strong> Statistic Report</h3>
+                                </div>
+                                {% include 'includes/_messages.html' %}
+                            </div>
+                            <div class="row">
+                                <div class="span4" >
+                                    
+                                    <table class="table table-bordered table-condensed table-hover">
+                                        <thead>
+                                        <tr style="background-color:#f5f4f3;">
+                                            <th>Order Type</th>
+                                            <th>Number Orders</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                    {%  for row in rows %}
+                                            <tr>
+                                                <td> {{row.Order_Type}} </td>
+                                                <td> {{row.Num_Orders}} </td>
+                                            </tr>
+                                    {%  endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                                <div class="span4">
+                                    <div class="big-cta">
+                                        PickUp / Delivery Active Orders
+                                        <img src="{{ url_for('visualize') }}">
+                                    </div>
+                                </div>
+                            </div>
+                            </div>
+                            <div id="pagination">
+                                <span class="all">Page 1 of 1</span>
+                                <span class="current">1</span>
+                                <!--<a href="#" class="inactive">2</a>
+                                <a href="#" class="inactive">3</a>-->
+                            </div>
+                            <div class="bottom-article">
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}

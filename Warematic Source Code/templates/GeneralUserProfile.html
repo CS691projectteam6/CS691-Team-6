@@ -1,0 +1,123 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<section id="inner-headline">
+    <div class="container">
+        <div class="row">
+            <div class="span4">
+                <div class="inner-heading">
+                    <h2>Update Your Profile</h2>
+                </div>
+            </div>
+            <div class="span8">
+                <ul class="breadcrumb">
+                    <li><a href="/"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
+                    <li><a href="#">Services</a><i class="icon-angle-right"></i></li>
+                    <li class="active">My Account</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="content">
+    <div class="container">
+        <div class="row">
+            <div class="span8">
+                <article>
+                    <div class="row">
+                        <div class="span8">
+                            
+                            <div class="post-image">
+                                <div class="post-heading">
+                                    <h4>Update you Warematic Account by filling <strong>the form below</strong></h4>
+                                </div>
+                                {% include 'includes/_messages.html' %}
+                            </div>
+                
+                            <div>
+                                
+                                <form action="" method="post" class="contactForm">
+                                    <input type="hidden" name="numOfItems" id="numOfItems" value="" />
+                                    <div id="sendmessage">Your message has been sent. Thank you!</div>
+                                    <div id="errormessage"></div>
+        
+                                    <div class="row">
+                                        <div class="span8 form-group">
+                                            <h6><b>Contact Information</b></h6>
+                                        </div>
+                                        <div class="span4 form-group">
+                                            <input type="text" name="firstname" class="form-control" id="firstname" placeholder="Your First Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" value="{{userInfo.First_Name}}"  />
+                                            <div class="validation"></div>
+                                        </div>
+                                        <div class="span4 form-group">
+                                            <input type="text" name="lastname" class="form-control" id="lastname" placeholder="Your Last Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" value="{{userInfo.Last_Name}}"  />
+                                            <div class="validation"></div>
+                                        </div>
+                                        <div class="span4 form-group">
+                                            <input type="text" class="form-control" name="phone" id="phone" placeholder="Your Phone" data-rule="email" data-msg="Please enter a valid email" value="{{userInfo.User_Phone}}"  />
+                                            <div class="validation"></div>
+                                        </div>
+                                        <div class="span4 form-group">
+                                            <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" value="{{userInfo.User_Name}}"  />
+                                            <div class="validation"></div>
+                                        </div>
+                                        
+                                        <div class="span8 form-group">
+                                            <br>
+                                            <h6><b>Address</b></h6>
+                                        </div>
+                                        <div class="span4 form-group">
+                                            <input type="text" class="form-control" name="street" id="street" placeholder="Street" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" value="{{userInfo.Street_Address}}" />
+                                            <div class="validation"></div>
+                                        </div>
+                                        <div class="span4 form-group">
+                                            <input type="text" class="form-control" name="house" id="house" placeholder="House, Building, Apartment" data-rule="email" data-msg="Please enter a valid email" value="{{userInfo.House_Address}}" />
+                                            <div class="validation"></div>
+                                        </div>
+                                        <div class="span8 form-group">
+                                            <input type="text" class="form-control" name="city" id="city" placeholder="City" data-rule="email" data-msg="Please enter a valid email" value="{{userInfo.City}}" />
+                                            <div class="validation"></div>
+                                        </div>
+                                        <div class="span4 form-group">
+                                            <select class="form-control" name="state" id="state" style="width: 100%; height: 40px;">
+                                                <option value="">Select...</option>
+                                                {% for state in states %}
+                                                    <option value="{{state.ID_State}}" {% if state.ID_State == userInfo.State %} selected {% endif %} > {{state.State_Desc}} </option>
+                                                {% endfor %}
+                                            </select>
+                                            <div class="validation"></div>
+                                        </div>
+                                        <div class="span4 form-group">
+                                            <input type="text" class="form-control" name="zipCode" id="zipCode" placeholder="Zip Code" data-rule="email" data-msg="Please enter a valid email" value="{{userInfo.ZipCode}}" />
+                                            <div class="validation"></div>
+                                        </div>
+                                                                       
+                                        <div class="span8 margintop3 form-group">
+                                            <div class="validation"></div>
+                                            <br>
+                                            <p class="text-center">
+                                                <button id="btnSubmit" class="btn btn-medium btn-theme margintop10" type="submit">Update Profile</button>
+                                            </p>
+                                        </div>
+                                    </div>
+                                </form>
+
+                            </div>
+
+                            <div class="bottom-article">
+                 
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+            <!-- RIGHT MENU OPTIONS -->
+            {% include 'includes/RightMenu.html' %}
+            <!-- END RIGHT MENU OPTIONS -->
+        </div>
+    </div>
+</section>
+
+{% endblock %}

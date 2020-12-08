@@ -15,6 +15,25 @@
                             <a href="/">Home </a>
                         </li>
                         {% endif %}
+                        {% if session.user_profile == 1 %}
+                        <li class="dropdown">
+                            <a href="#">Admin <i class="icon-angle-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/AdminUsers">Warematic Users</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#">Reports<i class="icon-angle-down"></i></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="/ActiveClients_Report">Active Clients</a></li>
+                                <li><a href="/WarehouseMerch_Report">Storage Merchandise</a></li>
+                                <li><a href="/ActiveOrders_Statistic">Active Orders</a></li>
+                                <li><a href="/ActiveOrders_Status_Statistic">Active Orders by Status</a></li>
+                                <li><a href="/Orders_GeoDistribution_Statistic">Orders Geographic Dist.</a></li>
+                                <li><a href="/WarehouseCapacity_Statistic">Warehouse Capacity</a></li>
+                            </ul>
+                        </li>
+                        {% endif %}
                         {% if session.user_profile == 4 %}
                         <li class="dropdown">
                             <a href="#">Services <i class="icon-angle-down"></i></a>
@@ -23,14 +42,15 @@
                                 <li><a href="/NewDeliveryOrder">Delivery Goods</a></li>
                                 <li><a href="/ViewMyOrders">My Orders</a></li>
                                 <li><a href="/MyWarehouse">My Warehouse</a></li>
-                                <li><a href="#">Orders History</a></li>
+                                <li><a href="/ViewOrdersHistory">Orders History</a></li>
+                                <li><a href="/GeneralUserProfile">My Account</a></li>
                                 <!--<li><a href="icon-variations.html">Icon variations</a></li>-->
-                                <li class="dropdown">
+                                <!--<li class="dropdown">
                                     <a href="#">My Account <i class="icon-angle-right"></i></a>
                                     <ul class="dropdown-menu sub-menu-level1">
                                         <li><a href="#">Update</a></li>
                                     </ul>
-                                </li>
+                                </li>-->
                             </ul>
                         </li>
                         {% endif %}
@@ -39,9 +59,6 @@
                             <a href="#">Warehouse<i class="icon-angle-down"></i></a>
                             <ul class="dropdown-menu">
                                 <li><a href="/ViewWarehouseOrders">Process Order ( {{session.count_worders}} )</a></li>
-                                <li><a href="">Reports</a></li>
-                                <!--<li><a href="testimonials.html">Testimonials</a></li>
-                                <li><a href="404.html">404</a></li>-->
                             </ul>
                         </li>
                         {% endif %}
@@ -50,9 +67,6 @@
                             <a href="#">Delivery<i class="icon-angle-down"></i></a>
                             <ul class="dropdown-menu">
                                 <li><a href="/ViewDeliveryOrders">Process Order ( {{session.count_dorders}} )</a></li>
-                                <li><a href="">Reports</a></li>
-                                <!--<li><a href="portfolio-4cols.html">Portfolio 4 columns</a></li>
-                                <li><a href="portfolio-detail.html">Portfolio detail</a></li>-->
                             </ul>
                         </li>
                         {% endif %}

@@ -5,16 +5,16 @@
 <section id="inner-headline">
     <div class="container">
         <div class="row">
-            <div class="span4">
+            <div class="span7">
                 <div class="inner-heading">
-                    <h2>Delivery Orders</h2>
+                    <h2>Warematic Clients</h2>
                 </div>
             </div>
-            <div class="span8">
+            <div class="span5">
                 <ul class="breadcrumb">
                     <li><a href="/"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
-                    <li><a href="/ViewDeliveryOrders">Delivery</a><i class="icon-angle-right"></i></li>
-                    <li class="active">View Delivery Orders</li>
+                    <li><a href="">Warehouse</a><i class="icon-angle-right"></i></li>
+                    <li class="active">Report - Clients </li>
                 </ul>
             </div>
         </div>
@@ -29,39 +29,41 @@
                     <div class="row">
                         <div class="span12">
                             <div class="post-image">
-                                <div class="post-heading">
-                                    <h4>Delivery Orders <strong>to process</strong></h4>
+                                <div class="post-heading" style="text-align: center;">
+                                    <h3>Active <strong>Clients</strong> Report</h3>
                                 </div>
                                 {% include 'includes/_messages.html' %}
                             </div>
                             <div class="row">
                                 <div class="span12">
                                     <form class="form-search">
-                                        <input placeholder="Enter a keyword" type="text" class="input-medium search-query">
+                                        <input placeholder="Enter a keyword" name="order_id" type="text" class="input-medium search-query">
                                         <button type="submit" class="btn btn-square btn-theme">Search</button>
                                     </form>
-                                    <table class="table table-hover">
+                                    <table class="table table-bordered table-condensed table-hover">
                                         <thead>
-                                        <tr>
-                                            <th>Order Id</th>
-                                            <th>Client Name</th>
+                                        <tr style="background-color:#f5f4f3;">
+                                            <th>First Name</th>
+                                            <th>Last Name</th>
                                             <th>Email</th>
-                                            <th>Order Date</th>
-                                            <th>Delivery Date</th>
-                                            <th>Status</th>
-                                            <th>Action</th>
+                                            <th>Phone #</th>
+                                            <th>Street</th>
+                                            <th>City</th>
+                                            <th>State</th>
+                                            <th>Zip Code</th>
                                         </tr>
                                         </thead>
                                         <tbody>
-                                    {%  for order in deliveryOrders %}
+                                    {%  for client in clients %}
                                         <tr>
-                                            <td> {{order.ID_Order}}     </td>
-                                            <td> {{order.Client_Name}}  </td>
-                                            <td> {{order.Client_Email}} </td>
-                                            <td> {{order.Order_Date}}   </td>
-                                            <td> {{order.Delivery_Date}}  </td>
-                                            <td> {{order.Order_Status}} </td>
-                                            <td> <a href="/Detail_DOrder/{{order.ID_Order}}">Process</a></td>
+                                            <td> {{client.First_Name}} </td>
+                                            <td> {{client.Last_Name}} </td>
+                                            <td> {{client.User_Name}} </td>
+                                            <td> {{client.User_Phone}} </td>
+                                            <td> {{client.Street_Address}} &nbsp; {{client.House_Address}}</td>
+                                            <td> {{client.City}} </td>
+                                            <td> {{client.State}} </td>
+                                            <td> {{client.ZipCode}} </td>
                                         </tr>
                                     {%  endfor %}
                                         </tbody>
@@ -75,7 +77,6 @@
                                 <a href="#" class="inactive">3</a>
                             </div>
                             <div class="bottom-article">
-                 
                             </div>
                         </div>
                     </div>

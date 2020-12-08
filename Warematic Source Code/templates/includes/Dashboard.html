@@ -3,6 +3,40 @@
     <div class="container">
         <div class="row">
             <div class="span12">
+                <!-- Icons for Warehouse Clerk Users Access -->
+                {%  if session.user_profile == 1%}
+                    <div class="row">
+                        <div class="span12">
+                            <div class="box aligncenter">
+                                <div class="aligncenter icon">
+                                    <a href="/AdminUsers">
+                                        <i class="icon-briefcase icon-circled icon-64 active"></i>
+                                    </a>
+                                </div>
+                                <div class="text">
+                                    <h6>User Administrator</h6>
+                                    <p> Access here to manage Warematic crew team members. </p>
+                                    <a href="/AdminUsers">Click here</a>
+                                </div>
+                            </div>
+                        </div>  
+                    </div>
+                    <!--<div class="row"> 
+                        <div class="span4">
+                            <div class="big-cta">
+                                <p>Pick Up / Delivery Active Orders</p>
+                                <img src="{{ url_for('visualize') }}">
+                            </div>
+                        </div>
+                        <div class="span4">
+                            <div class="big-cta">
+                                <p></p>
+                                <img src="{{ url_for('visualize_numOrders_by_type') }}">
+                            </div>
+                        </div>
+                    </div>-->
+                {%  endif %}
+            
             <!-- Icons for Warehouse Clerk Users Access -->
             {%  if session.user_profile == 2 or session.user_profile == 3 %}
                 <div class="row">

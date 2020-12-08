@@ -1,0 +1,176 @@
+{% extends 'layout.html' %}
+
+{% block body %}
+
+<section id="inner-headline">
+    <div class="container">
+        <div class="row">
+            <div class="span4">
+                <div class="inner-heading">
+                    <h2>User Administrator</h2>
+                </div>
+            </div>
+            <div class="span8">
+                <ul class="breadcrumb">
+                    <li><a href="/"><i class="icon-home"></i></a><i class="icon-angle-right"></i></li>
+                    <li><a href="/">Administrator</a><i class="icon-angle-right"></i></li>
+                    <li class="active">System Users</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section id="content">
+    <div class="container">
+        <div class="row">
+            <div class="span12">
+                <article>
+                    <div class="row">
+                        <div class="span12">
+                            <div class="post-image">
+                                <div class="post-heading">
+                                    <h4>Warematic <strong>Crew</strong></h4>
+                                    <a href="#NewUserModal" class="btn btn-red" data-dismiss="modal" aria-hidden="true" data-toggle="modal" data-target="#NewUserModal">
+                                        <i class="icon-plus"></i> New User 
+                                    </a>
+                                </div>
+                                {% include 'includes/_messages.html' %}
+                            </div>
+                            <div class="row">
+                                <div class="span12">
+                                    <table class="table table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>User Id</th>
+                                            <th>Full Name</th>
+                                            <th>UserName</th>
+                                            <th>Profile</th>
+                                            <th>Action</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                    {%  for user in users %}
+                                            <tr>
+                                                <td> {{user.ID_User}}   </td>
+                                                <td> {{user.Full_Name}} </td>
+                                                <td> {{user.User_Name}} </td>
+                                                <td> {{user.Profile_Description}}</td>
+                                                <td> <a href="/EditCrewUser/{{user.ID_User}}" data-dismiss="modal" aria-hidden="true" data-toggle="modal" data-target="#EditUserModal{{user.ID_User}}">Edit</a> </td>
+                                            </tr>
+                                            <tr>
+                                            <div id="EditUserModal{{user.ID_User}}" class="modal styled hide fade" tabindex="-1" role="dialog" aria-labelledby="EditUserModal" aria-hidden="true">
+                                                <div class="modal-header">
+                                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                                    <h4 id="editModalLabel">Edit <strong>User</strong></h4>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <form action="{{url_for('EditCrewUser')}}" method="POST" class="form-horizontal">
+                                                        <div class="control-group">
+                                                            <label class="control-label" for="firstName">First Name</label>
+                                                            <div class="controls">
+                                                                <input type="text" name="firstName" id="firstName" placeholder="First Name" value="{{user.First_Name}}" style="width: 95%" >
+                                                                <input type="hidden" name="userID" value="{{user.ID_User}}">
+                                                            </div>
+                                                        </div>
+                                                        <div class="control-group">
+                                                            <label class="control-label" for="lastName">Last Name</label>
+                                                            <div class="controls">
+                                                                <input type="text" name="lastName" id="lastName" placeholder="Last Name" value="{{user.Last_Name}}" style="width: 95%">
+                                                            </div>
+                                                        </div>
+                                                        <div class="control-group">
+                                                            <label class="control-label" for="userEmail">Email</label>
+                                                            <div class="controls">
+                                                                <input type="text" name="userEmail" id="userEmail" placeholder="Username" value="{{user.User_Name}}" style="width: 95%">
+                                                            </div>
+                                                        </div>
+                                                        <div class="control-group">
+                                                            <label class="control-label" for="userProfileID">Pro</label>
+                                                            <select class="controls" name="userProfileID" id="userProfileID" style="width: 98%">
+                                                                <option value="">Select...</option>
+                                                            {%  for profile in profiles %}
+                                                                    <option value="{{profile.Profile_ID}}" {% if profile.Profile_ID == user.Profile_ID %} selected {% endif %}> {{profile.Profile_Description}} </option>
+                                                            {%  endfor %}
+                                                            </select>
+                                                        </div>
+                                                        <div class="control-group" style="text-align: center;">
+                                                            <div class="controls">
+                                                                <button type="submit" class="btn btn-blue">Update User</button>
+                                                            </div>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                            </tr>
+                                    {%  endfor %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div id="NewUserModal" class="modal styled hide fade" tabindex="-1" role="dialog" aria-labelledby="deleteModalLabel" aria-hidden="true">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                                    <h4 id="deleteModalLabel">Add <strong>New User</strong></h4>
+                                </div>
+                                <div class="modal-body">
+                                    <form action="{{url_for('AddNewCrewUser')}}"  method="POST" class="form-horizontal">
+                                        <div class="control-group">
+                                            <label class="control-label" for="firstName">First Name</label>
+                                            <div class="controls">
+                                                <input type="text" name="firstName" id="firstName" placeholder="First Name">
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label" for="lastName">Last Name</label>
+                                            <div class="controls">
+                                                <input type="text" name="lastName" id="lastName" placeholder="Last Name">
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label" for="userEmail">Email</label>
+                                            <div class="controls">
+                                                <input type="text" name="userEmail" id="userEmail" placeholder="Username">
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label" for="userPassword">Password</label>
+                                            <div class="controls">
+                                                <input type="password" name="userPassword" id="userPassword" placeholder="Password">
+                                            </div>
+                                        </div>
+                                        <div class="control-group">
+                                            <label class="control-label" for="userProfileID">Profile</label>
+                                            <select class="controls" name="userProfileID" id="userProfileID">
+                                                <option value="">Select...</option>
+                                            {%  for profile in profiles %}
+                                                    <option value="{{profile.Profile_ID}}"> {{profile.Profile_Description}} </option>
+                                            {%  endfor %}
+                                            </select>
+                                        </div>
+                                        <div class="control-group">
+                                            <div class="controls">
+                                                <button type="submit" class="btn btn-blue">Add User</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                            <div id="pagination">
+                                <span class="all">Page 1 of 3</span>
+                                <span class="current">1</span>
+                                <a href="#" class="inactive">2</a>
+                                <a href="#" class="inactive">3</a>
+                            </div>
+                            <div class="bottom-article">
+                 
+                            </div>
+                        </div>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+</section>
+
+{% endblock %}
